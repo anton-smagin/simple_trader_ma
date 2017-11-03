@@ -9,8 +9,8 @@ class TraderDecision
   SLOWMA = 50
   FASTMA = 15
 
-  STOPLOSS = 0.0002
-  TAKEPROFIT = 0.0004
+  STOPLOSS = 0.0004
+  TAKEPROFIT = 0.0008
 
   def call
     PAIRS.each do |pair|
@@ -38,7 +38,7 @@ class TraderDecision
             instrument: instrument)
   end
 
-  def wait(price)
+  def wait(price, instrument)
     # do nothing
   end
 

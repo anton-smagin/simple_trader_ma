@@ -2,7 +2,7 @@ class HttpTrader
   URL = 'https://api-fxpractice.oanda.com'.freeze
   TICKS_COUNT = 55
   TIME_FRAME = 'M1'
-  UNITS = 100
+  UNITS = 5000
 
   def ticks(instrument)
     request_ticks(instrument)['candles'].map{|a| a['closeAsk']}
