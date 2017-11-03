@@ -29,7 +29,7 @@ class TraderDecision
   end
 
   def sell(price)
-    execute(side: 'buy', stop_loss: (price + price * STOPLOSS), take_profit:(price - price * TAKEPROFIT))
+    execute(side: 'sell', stop_loss: (price + price * STOPLOSS), take_profit:(price - price * TAKEPROFIT))
   end
 
   def wait(price)
