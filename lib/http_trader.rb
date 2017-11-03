@@ -30,7 +30,7 @@ class HttpTrader
                                  takeProfitOnFill: {price: take_profit.to_s[0..6]},
                                  units: units
                                }}.to_json)
-    OrdersRespone.create(response: JSON.parse(response.body))
+    OrdersResponse.create(response: JSON.parse(response.body))
     JSON.parse(response.body)
   end
 

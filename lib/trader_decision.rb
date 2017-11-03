@@ -16,7 +16,7 @@ class TraderDecision
     PAIRS.each do |pair|
       pair_ticks = ticks(pair)
       signal = MASignal.new.call(ticks: pair_ticks, slow_m_a: SLOWMA, fast_m_a: FASTMA)
-      send(signal, pair_ticks.last)
+      send(signal, pair_ticks.last, pair)
     end
   end
 
@@ -24,12 +24,18 @@ class TraderDecision
     http_trader.ticks(instrument)
   end
 
-  def buy(price)
-    execute(side: 'buy', stop_loss: (price - price * STOPLOSS), take_profit:(price + price * TAKEPROFIT))
+  def buy(price, instrument)
+    execute(side: 'buy',
+            stop_loss: (price - price * STOPLOSS),
+            take_profit:(price + price * TAKEPROFIT),
+            instrument: instrument)
   end
 
-  def sell(price)
-    execute(side: 'sell', stop_loss: (price + price * STOPLOSS), take_profit:(price - price * TAKEPROFIT))
+  def sell(price, instrument)
+    execute(side: 'sell',
+            stop_loss: (price + price * STOPLOSS),
+            take_profit:(price - price * TAKEPROFIT),
+            instrument: instrument)
   end
 
   def wait(price)
