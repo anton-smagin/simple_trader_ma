@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171103093545) do
+ActiveRecord::Schema.define(version: 20171103103035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20171103093545) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
-  create_table "orders_respones", force: :cascade do |t|
+  create_table "orders_responses", force: :cascade do |t|
     t.text "response"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
