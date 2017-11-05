@@ -1,20 +1,21 @@
 class HttpTrader
   URL = 'https://api-fxpractice.oanda.com'.freeze
   TICKS_COUNT = 55
-  TIME_FRAME = 'M1'
+  TIME_FRAME = 'H1'
   UNITS = 5000
 
-  def ticks(instrument)
-    request_ticks(instrument)['candles'].map{|a| a['closeAsk']}
+  def ticks(instrument, to = Time.now.utc)
+    request_ticks(instrument, to)['candles'].map{|a| a['mid']['c'].to_f}
   end
 
-  def request_ticks(instrument)
-    JSON.parse(HTTParty.get("#{URL}/v1/candles",
+  def request_ticks(instrument, to = Time.now.utc)
+    JSON.parse(HTTParty.get("#{URL}/v3/instruments/#{instrument}/candles",
                               query: {
-                                instrument: instrument,
                                 count: TICKS_COUNT,
-                                granularity: TIME_FRAME
-                              }
+                                granularity: TIME_FRAME,
+                                to: to.rfc3339
+                              },
+                              headers: headers
                            ).body)
   end
 

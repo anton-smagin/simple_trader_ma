@@ -3,6 +3,8 @@
 require 'moving_average'
 # moving average signal
 class MASignal
+  attr_reader :ticks, :slow_m_a, :fast_m_a
+
   def call(ticks:, fast_m_a:, slow_m_a:)
     @ticks = ticks
     @fast_m_a = fast_m_a
@@ -15,12 +17,8 @@ class MASignal
     fast_average(ticks) > slow_average(previous_ticks) ? :buy : :sell
   end
 
-  def ticks
-    @ticks
-  end
-
   def previous_ticks
-    @ticks[0...-1]
+    ticks[0...-1]
   end
 
   def signal_changed?
@@ -28,10 +26,10 @@ class MASignal
   end
 
   def slow_average(ticks)
-    ticks.sma(ticks.size - 1, @slow_m_a)
+    ticks.sma(ticks.size - 1, slow_m_a)
   end
 
   def fast_average(ticks)
-    ticks.sma(ticks.size - 1, @fast_m_a)
+    ticks.sma(ticks.size - 1, fast_m_a)
   end
 end

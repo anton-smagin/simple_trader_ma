@@ -9,8 +9,8 @@ class TraderDecision
   SLOWMA = 50
   FASTMA = 15
 
-  STOPLOSS = 0.0004
-  TAKEPROFIT = 0.0008
+  STOPLOSS = 0.002
+  TAKEPROFIT = 0.004
 
   def call
     PAIRS.each do |pair|
