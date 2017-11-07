@@ -34,5 +34,7 @@ module SimpleTraderApi
     config.api_only = true
 
     config.active_job.queue_adapter = :delayed_job
+
+    config.logger = Logger.new(STDOUT)
   end
 end

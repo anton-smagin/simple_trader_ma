@@ -4,11 +4,13 @@ class HttpTrader
   TIME_FRAME = 'H1'
   UNITS = 5000
 
-  def ticks(instrument, to = Time.now.utc)
-    request_ticks(instrument, to)['candles'].map{|a| a['mid']['c'].to_f}
+  def ticks(instrument, to = 1.minute.ago.utc)
+    response = request_ticks
+    return Rails.logger.error response['errorMessage'] if response['errorMessage']
+    response['candles'].map{|a| a['mid']['c'].to_f}
   end
 
-  def request_ticks(instrument, to = Time.now.utc)
+  def request_ticks(instrument, to = 1.minute.ago.utc)
     JSON.parse(HTTParty.get("#{URL}/v3/instruments/#{instrument}/candles",
                               query: {
                                 count: TICKS_COUNT,
