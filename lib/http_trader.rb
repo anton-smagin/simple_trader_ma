@@ -5,7 +5,7 @@ class HttpTrader
   UNITS = 5000
 
   def ticks(instrument, to = 1.minute.ago.utc)
-    response = request_ticks
+    response = request_ticks(instrument, to)
     return Rails.logger.error response['errorMessage'] if response['errorMessage']
     response['candles'].map{|a| a['mid']['c'].to_f}
   end
