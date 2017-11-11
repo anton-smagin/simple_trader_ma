@@ -7,7 +7,8 @@ class HttpTrader
   def ticks(instrument, to = 1.minute.ago.utc)
     response = request_ticks(instrument, to)
     return Rails.logger.error response['errorMessage'] if response['errorMessage']
-    response['candles'].map{|a| a['mid']['c'].to_f}
+    response['candles'].select{|c| c['complete']}
+                       .map{|c| c['mid']['c'].to_f}
   end
 
   def request_ticks(instrument, to = 1.minute.ago.utc)
