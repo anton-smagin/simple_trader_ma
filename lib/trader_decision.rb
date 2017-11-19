@@ -16,6 +16,8 @@ class TraderDecision
     PAIRS.each do |pair|
       pair_ticks = ticks(pair)
       signal = MASignal.new.call(ticks: pair_ticks, slow_m_a: SLOWMA, fast_m_a: FASTMA)
+      previous_signal = MASignal.new.call(ticks: pair_ticks[0...-1], slow_m_a: SLOWMA, fast_m_a: FASTMA)
+      signal = :wait if previous_signal != :wait
       send(signal, pair_ticks.last, pair)
     end
   end

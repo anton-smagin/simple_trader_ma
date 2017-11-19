@@ -1,7 +1,7 @@
 class HttpTrader
   URL = 'https://api-fxpractice.oanda.com'.freeze
   TICKS_COUNT = 55
-  TIME_FRAME = 'H1'
+  TIME_FRAME = 'H1'.freeze
   UNITS = 5000
 
   def ticks(instrument, to = 1.minute.ago.utc)
