@@ -4,8 +4,8 @@ require 'm_a_signal'
 
 describe MASignal do
   let(:wait_signal) { (0..25).to_a  }
-  let(:buy_signal) { (0..25).to_a.reverse << 100 }
-  let(:sell_signal) { (0..25).to_a << -100 }
+  let(:buy_signal) { (0..25).to_a.reverse + [25, 50, 100] }
+  let(:sell_signal) { (0..25).to_a + [0, -25, -100] }
   context '#call' do
     it 'sends wait signal when signal doesn`t change' do
       expect(described_class.new.call(ticks: wait_signal, fast_m_a: 14, slow_m_a: 25)).to eq(:wait)

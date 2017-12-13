@@ -14,7 +14,7 @@ class MASignal
   end
 
   def signal(ticks)
-    fast_average(ticks) > slow_average(previous_ticks) ? :buy : :sell
+    fast_average(ticks) > slow_average(ticks) ? :buy : :sell
   end
 
   def previous_ticks
